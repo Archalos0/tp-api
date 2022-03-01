@@ -3,12 +3,9 @@ package com.api.product.api.product.model;
 
 import javax.persistence.*;
 
-
-
 @Entity
 @Table(name = "client")
 public class Customer {
-
 
     private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id_client;
     private String nom;

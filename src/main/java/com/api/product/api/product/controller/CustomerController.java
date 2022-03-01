@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public ResponseEntity<List<CustomerDTO>> getContracts(){
+    public ResponseEntity<List<CustomerDTO>> getCustomers(){
         List<Customer> customers = customerService.getCustomers();
         List<CustomerDTO> customersDTO = customers.stream().map(CustomerDTO::from).collect(Collectors.toList());
         return new ResponseEntity<>(customersDTO, HttpStatus.OK);
