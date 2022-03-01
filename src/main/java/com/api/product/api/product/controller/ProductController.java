@@ -1,31 +1,55 @@
 package com.api.product.api.product.controller;
 
-import com.api.product.api.product.model.Article;
-import com.api.product.api.product.repository.ArticleRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import org.springframework.web.bind.annotation.RequestBody;
+import com.api.product.api.product.exception.ProductNotFoundException;
+import com.api.product.api.product.model.Product;
+import com.api.product.api.product.repository.ProductRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class ProductController {
 
-    private ArticleRepository repository;
+    private ProductRepository repository;
 
-    ProductController(ArticleRepository repository) {
+    ProductController(ProductRepository repository) {
         this.repository = repository;
     }
 
     @GetMapping("/products")
-    List<Article> all() {
+    List<Product> all() {
         return repository.findAll();
     }
 
-    @PostMapping("url/product")
-    Article newProduct(@RequestBody Article newArticle){
+    @GetMapping("/products/{id}")
+    Product one(@PathVariable Long id) {
+
+        return repository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    @PostMapping("/products")
+    Product newProduct(@RequestBody Product newArticle){
         return repository.save(newArticle);
+    }
+
+    @PutMapping("/products/{id}")
+    Product replaceProduct(@RequestBody Product newArticle, @PathVariable Long id) {
+
+        return repository.findById(id)
+                .map(article -> {
+                    article.setDesignation(newArticle.getDesignation());
+                    article.setPrix(newArticle.getPrix());
+                    return repository.save(article);
+                })
+                .orElseGet(() -> {
+                    newArticle.setID(id);
+                    return repository.save(newArticle);
+                });
+    }
+
+    @DeleteMapping("/products/{id}")
+    void deleteEmployee(@PathVariable Long id) {
+        repository.deleteById(id);
     }
 }

@@ -63,22 +63,3 @@ CREATE TABLE IF NOT EXISTS `contrat` (
   `date_fin` date NOT NULL,
   PRIMARY KEY (`id_contrat`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `contrat_client`
---
-
-DROP TABLE IF EXISTS `contrat_client`;
-CREATE TABLE IF NOT EXISTS `contrat_client` (
-  `id_contrat_client` int(11) NOT NULL AUTO_INCREMENT,
-  `id_client` int(11) NOT NULL,
-  `id_contrat` int(11) NOT NULL,
-  PRIMARY KEY (`id_contrat_client`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
