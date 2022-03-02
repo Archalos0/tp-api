@@ -16,8 +16,6 @@ public class ContractDTO {
 
     private Long id_contrat;
     private String nom;
-    private Date date_debut;
-    private Date date_fin;
     private float marge;
     private List<CustomerDTO> customersDTO = new ArrayList<>();
 
@@ -26,8 +24,6 @@ public class ContractDTO {
 
         contractDTO.setId_contrat(contract.getId_contrat());
         contractDTO.setNom(contract.getNom());
-        contractDTO.setDate_debut(contract.getDate_debut());
-        contractDTO.setDate_fin(contract.getDate_fin());
         contractDTO.setMarge(contract.getMarge());
         contractDTO.setCustomersDTO(contract.getCustomers().stream().map(CustomerDTO::from).collect(Collectors.toList()));
 

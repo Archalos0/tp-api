@@ -16,9 +16,6 @@ public class ContractController {
 
     private ContractService contractService;
 
-    /*ContractController(ContractRepository repository) {
-        this.repository = repository;
-    }*/
 
     ContractController(ContractService contractService) {
         this.contractService = contractService;
@@ -31,48 +28,11 @@ public class ContractController {
         return new ResponseEntity<>(contractsDTO, HttpStatus.OK);
     }
 
-    /*@GetMapping("/contracts")
-    List<Contract> all() {
-        return repository.findAll();
-    }
-
-    @GetMapping("/contracts/{id}")
-    Contract one(@PathVariable Long id) {
-
-        return repository.findById(id)
-                .orElseThrow(() -> new ContractNotFoundException(id));
-    }
-
-    @PostMapping("/contracts")
-    Contract newContract(@RequestBody Contract newContract){
-        return repository.save(newContract);
-    }*/
-
     @PostMapping("/contracts")
     public ResponseEntity<ContractDTO> newContract(@RequestBody final ContractDTO contractDTO){
         Contract newContract = contractService.addContract(Contract.from(contractDTO));
         return new ResponseEntity<>(ContractDTO.from(newContract), HttpStatus.OK);
     }
 
-    /*@PutMapping("/contracts/{id}")
-    Contract replaceContract(@RequestBody Contract newContract, @PathVariable Long id) {
 
-        return repository.findById(id)
-                .map(contract -> {
-                    contract.setNom(newContract.getNom());
-                    contract.setDate_debut(newContract.getDate_debut());
-                    contract.setDate_fin(newContract.getDate_fin());
-                    contract.setMarge(newContract.getMarge());
-                    return repository.save(contract);
-                })
-                .orElseGet(() -> {
-                    newContract.setID(id);
-                    return repository.save(newContract);
-                });
-    }
-
-    @DeleteMapping("/contracts/{id}")
-    void deleteContract(@PathVariable Long id) {
-        repository.deleteById(id);
-    }*/
 }
