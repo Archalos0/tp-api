@@ -16,13 +16,13 @@ import java.util.Date;
 class ApiProductApplicationTests {
 
 	@Test
-	void getUserInformations() throws ParseException {
+	void getUserInformations(){
 
 		Contract contract = new Contract();
 		contract.setId_contrat(1l);
 		contract.setNom("Contrat de test");
-		contract.setDate_debut(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-01"));
-		contract.setDate_fin(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-30"));
+		//contract.setDate_debut(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-01"));
+		//contract.setDate_fin(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-30"));
 		contract.setMarge(10f);
 
 		Customer customer = new Customer();
