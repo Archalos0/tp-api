@@ -16,13 +16,13 @@ import java.util.Date;
 class ApiProductApplicationTests {
 
 	@Test
-	void getUserInformations(){
+	void getUserInformations() throws ParseException {
 
 		Contract contract = new Contract();
 		contract.setId_contrat(1l);
 		contract.setNom("Contrat de test");
-		//contract.setDate_debut(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-01"));
-		//contract.setDate_fin(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-30"));
+		contract.setDate_debut(new SimpleDateFormat("yyyy-MM-dd").parse("2022-03-01"));
+		contract.setDate_fin(new SimpleDateFormat("yyyy-MM-dd").parse("2022-04-30"));
 		contract.setMarge(10f);
 
 		Customer customer = new Customer();
@@ -34,8 +34,8 @@ class ApiProductApplicationTests {
 
 		Assertions.assertEquals("Tanguy", customerDTO.getNom(), "test en échec pour le nom du client != Tanguy");
 		Assertions.assertEquals("Contrat de test", customerDTO.getContrat().getNom(), "test en échec pour le nom du contrat != Contrat de test");
-		//Assertions.assertEquals("2022-03-01", customerDTO.getContrat().getDate_debut(), "test en échec pour la date de début du contrat != 2022-03-01");
-		//Assertions.assertEquals("2022-04-30", customerDTO.getContrat().getDate_fin(), "test en échec pour la date de fin du contrat != 2022-04-30");
+		Assertions.assertEquals("2022-03-01", customerDTO.getContrat().getDate_debut(), "test en échec pour la date de début du contrat != 2022-03-01");
+		Assertions.assertEquals("2022-04-30", customerDTO.getContrat().getDate_fin(), "test en échec pour la date de fin du contrat != 2022-04-30");
 		Assertions.assertEquals(10f, customerDTO.getContrat().getMarge(), "test en échec pour la marge du contrat != 10");
 
 	}
