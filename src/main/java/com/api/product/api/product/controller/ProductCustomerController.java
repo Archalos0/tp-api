@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @RestController
 public class ProductCustomerController {
 
-    private ProductService productService;
-    private CustomerService customerService;
+    private final ProductService productService;
+    private final CustomerService customerService;
 
     ProductCustomerController(ProductService productService, CustomerService customerService){
         this.productService = productService;
@@ -33,5 +33,13 @@ public class ProductCustomerController {
 
         List<ProductCustomerDTO> productCustomersDTO = products.stream().map(product -> ProductCustomerDTO.from(product, customer.getContrat().getMarge())).collect(Collectors.toList());
         return new ResponseEntity<>(productCustomersDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/customers/{id_client}/products/{id_product}")
+    public ResponseEntity<ProductCustomerDTO> getOneProductCustomer(@PathVariable Long id_client, @PathVariable Long id_product){
+        Product product = productService.getOneProduct(id_product);
+        Customer customer = customerService.getOneCustomer(id_client);
+
+        return new ResponseEntity<>(ProductCustomerDTO.from(product, customer.getContrat().getMarge()), HttpStatus.OK);
     }
 }

@@ -6,6 +6,8 @@ import com.api.product.api.product.dto.ContractDTO;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,12 +35,12 @@ public class Contract {
         this.marge = marge;
     }
 
-    public static Contract from(ContractDTO contractDTO){
+    public static Contract from(ContractDTO contractDTO) {
         Contract contract = new Contract();
         contract.setId_contrat(contractDTO.getId_contrat());
         contract.setNom(contractDTO.getNom());
-        contract.setDate_debut(contractDTO.getDate_debut());
-        contract.setDate_fin(contractDTO.getDate_fin());
+        contract.setDate_debut(contract.getDate_debut());
+        contract.setDate_fin(contract.getDate_fin());
         contract.setMarge(contractDTO.getMarge());
 
         return contract;
