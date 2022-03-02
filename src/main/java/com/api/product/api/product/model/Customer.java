@@ -16,16 +16,23 @@ public class Customer {
 
     public Customer() {}
 
-    Customer(String nom, Contract contrat) {
+    public Customer(Long id_client, String nom) {
+        this.id_client = id_client;
         this.nom = nom;
+    }
+
+    public Customer(Long id_client, String nom, Contract contrat) {
+        this(id_client, nom);
         this.contrat = contrat;
     }
 
-    Customer(String nom, Long id_contrat) {
+
+
+    /*Customer(String nom, Long id_contrat) {
         this.nom = nom;
 
         this.contrat = contrat;
-    }
+    }*/
 
     public Long getID(){
         return id_client;

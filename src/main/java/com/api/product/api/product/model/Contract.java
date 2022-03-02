@@ -26,9 +26,15 @@ public class Contract {
 
     public Contract() {}
 
-    Contract(String nom, Date date_debut, Date date_fin, float marge) {
+    public Contract(Long id_contrat, String nom, float marge) {
+        this.id_contrat = id_contrat;
         this.nom = nom;
         this.marge = marge;
+    }
+
+    public Contract(Long id_contrat, String nom, float marge, List<Customer> customers) {
+        this(id_contrat, nom, marge);
+        this.customers = customers;
     }
 
     public static Contract from(ContractDTO contractDTO) {

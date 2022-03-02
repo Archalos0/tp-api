@@ -1,6 +1,7 @@
 package com.api.product.api.product.dto;
 
 import com.api.product.api.product.model.Product;
+import com.api.product.api.product.util.CalculPrixVente;
 import lombok.Data;
 
 @Data
@@ -18,7 +19,7 @@ public class ProductCustomerDTO {
         productContractDTO.setDesignation(product.getDesignation());
         productContractDTO.setPrix(product.getPrix());
 
-        productContractDTO.setPrix_vente(product.getPrix() + (marge / 100f * product.getPrix()) + (20f/100f * product.getPrix()));
+        productContractDTO.setPrix_vente(CalculPrixVente.CalculSellingPrice(product.getPrix(), marge));
 
         return productContractDTO;
     }

@@ -12,7 +12,8 @@ public class Product {
 
     public Product() {}
 
-    Product(String designation, float prix) {
+    public Product(Long id_article, String designation, float prix) {
+        this.id_article = id_article;
         this.designation = designation;
         this.prix = prix;
     }
