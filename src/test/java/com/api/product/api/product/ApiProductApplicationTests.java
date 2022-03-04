@@ -3,25 +3,18 @@ package com.api.product.api.product;
 import com.api.product.api.product.dto.ContractDTO;
 import com.api.product.api.product.dto.CustomerDTO;
 import com.api.product.api.product.dto.ProductCustomerDTO;
-import com.api.product.api.product.dto.ProductDTO;
 import com.api.product.api.product.model.Contract;
 import com.api.product.api.product.model.Customer;
 import com.api.product.api.product.model.Product;
-import com.api.product.api.product.util.CalculPrixVente;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.auditing.CurrentDateTimeProvider;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -49,14 +42,14 @@ class ApiProductApplicationTests {
 
 	static Stream<Arguments> getProductCustomer() throws Throwable {
 		return Stream.of(
+				Arguments.of(new Customer(2L,"Client 2"),
+						new Contract(2L, "Contrat numéro 2", 15f),
+						new Product(1L,"Moteur", 152.58f),
+						205.98f),
 				Arguments.of(new Customer(1L,"Client 1"),
 						new Contract(1L, "Contrat 1", 5f),
 						new Product(1L,"Moteur", 100f),
-						125f),
-				Arguments.of(new Contract(2L, "Contrat numéro 2", 15f),
-						new Customer(2L,"Client 2"),
-						new Product(1L,"Moteur", 100f),
-						135f));
+						125f));
 	}
 
 	@ParameterizedTest(
@@ -122,10 +115,9 @@ class ApiProductApplicationTests {
 
 		ProductCustomerDTO productDTO1 = ProductCustomerDTO.from(product1, customer.getContrat().getMarge());
 
-		Assertions.assertEquals(product1.getID(), productDTO1.getId_article(), "test en échec pour la marge du contrat du client 2 != " + product1.getID());
-		Assertions.assertEquals(product1.getDesignation(), productDTO1.getDesignation(), "test en échec pour la marge du contrat du client 2 != " + product1.getDesignation());
-		Assertions.assertEquals(product1.getPrix(), productDTO1.getPrix(), "test en échec pour la marge du contrat du client 2 != " + product1.getPrix());
-		Assertions.assertEquals(sellingPrice, productDTO1.getPrix_vente(), "test en échec pour la marge du contrat du client 2 != " + sellingPrice);
+		Assertions.assertEquals(product1.getID(), productDTO1.getId_article(), "test en échec pour l'id marge du produit != " + product1.getID());
+		Assertions.assertEquals(product1.getDesignation(), productDTO1.getDesignation(), "test en échec pour le nom du produit != " + product1.getDesignation());
+		Assertions.assertEquals(product1.getPrix(), productDTO1.getPrix(), "test en échec pour le prix de fabricationdu produit != " + product1.getPrix());
+		Assertions.assertEquals(sellingPrice, productDTO1.getPrix_vente(), "test en échec pour le prix de vente du produit par rapport au client != " + sellingPrice);
 	}
-
 }
