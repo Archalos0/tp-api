@@ -45,7 +45,7 @@ class ApiProductApplicationTests {
 				Arguments.of(new Customer(2L,"Client 2"),
 						new Contract(2L, "Contrat numéro 2", 15f),
 						new Product(1L,"Moteur", 152.58f),
-						205.98f),
+						205.983f),
 				Arguments.of(new Customer(1L,"Client 1"),
 						new Contract(1L, "Contrat 1", 5f),
 						new Product(1L,"Moteur", 100f),
